@@ -4,7 +4,7 @@ import pandas as pd
 def test_custom(current, reference, multiple=3, **kwargs):
     """Return the accuracy of a machine learning model."""
 
-    df = pd.read_csv("data/california_ref.csv")
+    df = pd.read_csv("pulsar_metrics\data\california_ref.csv")
     last_row_number = df.shape[0] - 1
 
     tp = 0
