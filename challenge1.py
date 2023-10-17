@@ -1,17 +1,24 @@
+import pandas as pd
 
-import numpy as np
-from pulsar_metrics.metrics.drift import CustomDriftMetric
 
-@CustomDriftMetric
-def test_custom(current, reference, multiple=3, **kwargs):
-    return multiple*np.max(current - reference)
+def custom_metric(file, avg_rooms, avg_occupancy):
+    """Return the rooms to occupany ratio.
+    file represents the CSV file
+    avg_rooms represents the average number of rooms
+    avg_occupancy represents the average number of people per household
+    """
 
-@CustomDriftMetric
-def test_custom(current, reference, multiple=3, **kwargs):
-    #Calculate z-scores of the feature for both the datasets
-    # return z-score_high - z-score_low
+    df = pd.read_csv(file)
+    last_row_number = df.shape[0] - 1
 
-#Then we call our updated function as below
-cus = test_custom(metric_name = 'test', feature_name = 'AveOccup') #it can be any numeric feature here
-cus.evaluate(current = data_new, reference = data_ref, threshold = 1, multiple=0.5)
+    total_rooms = 0
+    total_occupants = 0
 
+    for i in range(last_row_number):
+        rooms = df.loc[i, avg_rooms]
+        occupancy = df.loc[i, avg_occupancy]
+
+        total_rooms += rooms
+        total_occupants += occupancy
+
+    return total_rooms / total_occupants
