@@ -1,26 +1,19 @@
 import pandas as pd
 
 
-def test_custom(
-    file: str, target_col_name: str, prediction_col_name: str
-) -> float:
-    """Return the F1 score of a machine learning model.
-    'file' represents the CSV file
-    'target_col_name' represents the column name of the correct answers
-    'prediction_col_name' represents the column name of the model predictions
-    """
+def test_custom(current, reference, multiple=3, **kwargs):
+    """Return the F1 score of a machine learning model."""
 
-    df = pd.read_csv(file)
-    last_row_number = df.shape[0] - 1
+    min_len = min(len(current), len(reference))
 
     tp = 0
     tn = 0
     fp = 0
     fn = 0
 
-    for i in range(last_row_number + 1):
-        target = df.loc[i, target_col_name]
-        prediction = df.loc[i, prediction_col_name]
+    for i in range(min_len):
+        target = reference[i]
+        prediction = current[i]
 
         if target == prediction == 1:
             tp += 1
