@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 
-from scipy.stats import zscore
 from pulsar_metrics.metrics.drift import CustomDriftMetric
 
 @CustomDriftMetric
