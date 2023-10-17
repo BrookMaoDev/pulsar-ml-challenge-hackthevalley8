@@ -1,5 +1,19 @@
 import pandas as pd
+import numpy as np
+from pulsar_metrics.metrics.drift import CustomDriftMetric
 
+current = pd.read_csv("pulsar_metrics\data\california_new.csv")
+reference = pd.read_csv
+
+
+@CustomDriftMetric
+def test_custom(current, reference, multiple=3, **kwargs):
+    return multiple*np.max(current - reference)
+
+@CustomDriftMetric
+def test_custom(current, reference, multiple=3, **kwargs):
+    #Calculate z-scores of the feature for both the datasets
+    # return z-score_high - z-score_low
 
 def custom_metric(file, avg_rooms, avg_occupancy):
     """Return the rooms to occupany ratio.
