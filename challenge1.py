@@ -13,8 +13,22 @@ def test_custom(current, reference, multiple=3, **kwargs):
     metric_ref = ref[kwargs]
     metric_cur = cur[kwargs]
 
-    z_scores_ref = zscore(metric_ref)
-    z_scores_cur = zscore(metric_cur)
+    std_dev_ref = np.std(metric_ref)
+    std_dev_cur = np.std(metric_cur)
+    mean_ref = np.mean(metric_ref)
+    mean_cur = np.mean(metric_cur)
+
+    z_score_ref = [(value - mean_ref) / std_dev_ref for value in metric_ref]
+    z_score_cur = [(value - mean_cur) / std_dev_cur for value in metric_cur]
+    print(z_score_ref)
+    print(z_score_cur)
+    # return z-score_high - z-score_lows
+
+#def test_custom(current, reference, multiple=3, **kwargs):
+    #Calculate z-scores of the feature for both the datasets
+
+    #z_scores_cur = zscore(current)
+    #z_scores_ref = zscore(reference)
     
     # return z-score_high - z-score_lows
 
