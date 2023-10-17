@@ -1,5 +1,16 @@
 import pandas as pd
 
+from sklearn.metrics import f1_score
+from pulsar_metrics.metrics.drift import CustomDriftMetric
+
+@CustomDriftMetric
+def test_custom(current, reference, multiple=3, **kwargs):
+    #Calculate F1-score of actual and prediction values
+    F1 = f1_score(current, reference)
+
+    return F1
+
+
 
 def test_custom(
     file: str, target_col_name: str, prediction_col_name: str
