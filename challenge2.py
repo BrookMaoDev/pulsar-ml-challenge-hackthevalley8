@@ -3,13 +3,13 @@ import pandas as pd
 from sklearn.metrics import f1_score
 from pulsar_metrics.metrics.drift import CustomDriftMetric
 
+
 @CustomDriftMetric
 def test_custom(current, reference, multiple=3, **kwargs):
-    #Calculate F1-score of actual and prediction values
+    # Calculate F1-score of actual and prediction values
     F1 = f1_score(current, reference)
 
     return F1
-
 
 
 def test_custom(current, reference, multiple=3, **kwargs):
@@ -35,7 +35,7 @@ def test_custom(current, reference, multiple=3, **kwargs):
         elif target == 1 and prediction == 0:
             fn += 1
 
-    print("Accuracy analysis using data from file", file)
+    print("Accuracy analysis:")
     print("-------------------------")
 
     print("True Positives:", tp)
@@ -55,7 +55,3 @@ def test_custom(current, reference, multiple=3, **kwargs):
     print()
 
     return F1
-
-
-test_custom("pulsar_metrics\data\california_ref.csv", "clf_target", "y_pred")
-test_custom("pulsar_metrics\data\california_new.csv", "clf_target", "y_pred")
