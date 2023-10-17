@@ -1,14 +1,16 @@
 import pandas as pd
-import numpy as np
 
-def test_custom(file, target, prediction):
+
+def test_custom(
+    file: str, target_col_name: str, prediction_col_name: str
+) -> float:
     """Return the accuracy of a machine learning model.
     'file' represents the CSV file
-    'target' represents the column name of the correct answers
-    'prediction' represents the column name of the model predictions    
+    'target_col_name' represents the column name of the correct answers
+    'prediction_col_name' represents the column name of the model predictions
     """
 
-    df = pd.read_csv("pulsar_metrics\data\california_ref.csv")
+    df = pd.read_csv(file)
     last_row_number = df.shape[0] - 1
 
     tp = 0
@@ -17,8 +19,8 @@ def test_custom(file, target, prediction):
     fn = 0
 
     for i in range(last_row_number + 1):
-        target = df.loc[i, "clf_target"]
-        prediction = df.loc[i, "y_pred"]
+        target = df.loc[i, target_col_name]
+        prediction = df.loc[i, prediction_col_name]
 
         if target == prediction == 1:
             tp += 1
@@ -29,15 +31,20 @@ def test_custom(file, target, prediction):
         elif target == 1 and prediction == 0:
             fn += 1
 
+    print("Accuracy analysis using data from file", file)
+    print("-------------------------")
+
     print("True Positives:", tp)
     print("True Negatives:", tp)
     print("False Positives:", fp)
     print("False Negatives:", fn)
 
+    accuracy = (tn + tp) / (tn + tp + fp + fn)
+    print("Accuracy: " + str(accuracy * 100) + "%")
     print()
 
-    accuracy = (tn + tp) / (tn + tp + fp + fn)
-    print("Accuracy:", accuracy * 100, "%")
+    return accuracy
 
 
-test_custom(1, 2, 3)
+test_custom("pulsar_metrics\data\california_ref.csv", "clf_target", "y_pred")
+test_custom("pulsar_metrics\data\california_new.csv", "clf_target", "y_pred")
