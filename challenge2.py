@@ -4,7 +4,7 @@ import pandas as pd
 def test_custom(
     file: str, target_col_name: str, prediction_col_name: str
 ) -> float:
-    """Return the accuracy of a machine learning model.
+    """Return the F1 score of a machine learning model.
     'file' represents the CSV file
     'target_col_name' represents the column name of the correct answers
     'prediction_col_name' represents the column name of the model predictions
@@ -40,10 +40,17 @@ def test_custom(
     print("False Negatives:", fn)
 
     accuracy = (tn + tp) / (tn + tp + fp + fn)
+    precision = tp / (tp + fp)
+    recall = tp / (tp + fn)
+    F1 = 2 * (precision * recall) / (precision + recall)
+
     print("Accuracy: " + str(accuracy * 100) + "%")
+    print("Precision: " + str(precision * 100) + "%")
+    print("Recall: " + str(recall * 100) + "%")
+    print("F1 Score: " + str(F1 * 100) + "%")
     print()
 
-    return accuracy
+    return F1
 
 
 test_custom("pulsar_metrics\data\california_ref.csv", "clf_target", "y_pred")
