@@ -20,9 +20,9 @@ def test_custom(current, reference, multiple=3, **kwargs):
 
 def custom_metric(file, avg_rooms, avg_occupancy):
     """Return the rooms to occupany ratio.
-    file represents the CSV file
-    avg_rooms represents the column name of average number of rooms
-    avg_occupancy represents the column name of average number of people per household
+    'file' represents the CSV file
+    'avg_rooms' represents the column name of average number of rooms
+    'avg_occupancy' represents the column name of average number of people per household
     """
 
     df = pd.read_csv(file)

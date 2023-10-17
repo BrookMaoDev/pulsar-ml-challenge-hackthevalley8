@@ -1,8 +1,12 @@
 import pandas as pd
 import numpy as np
 
-def test_custom(current, reference, multiple=3, **kwargs):
-    """Return the accuracy of a machine learning model."""
+def test_custom(file, target, prediction):
+    """Return the accuracy of a machine learning model.
+    'file' represents the CSV file
+    'target' represents the column name of the correct answers
+    'prediction' represents the column name of the model predictions    
+    """
 
     df = pd.read_csv("pulsar_metrics\data\california_ref.csv")
     last_row_number = df.shape[0] - 1
