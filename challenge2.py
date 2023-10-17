@@ -1,5 +1,5 @@
 import pandas as pd
-
+import numpy as np
 
 def test_custom(current, reference, multiple=3, **kwargs):
     """Return the accuracy of a machine learning model."""
